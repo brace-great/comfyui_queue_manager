@@ -1,7 +1,11 @@
+import sqlite3
+import threading
 from pathlib import Path
-import sqlite3, threading
 
-DB_PATH = Path(__file__).resolve().parents[2] / "data" / "qm-queue.db"
+from server import PromptServer
+
+port = PromptServer.instance.port if hasattr(PromptServer.instance, "port") else "default"
+DB_PATH = Path(__file__).resolve().parents[2] / "data" / f"qm-queue_{port}.db"
 _local = threading.local()
 
 
