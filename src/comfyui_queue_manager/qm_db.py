@@ -2,9 +2,9 @@ import sqlite3
 import threading
 from pathlib import Path
 
-from server import PromptServer
+from comfy.cli_args import args  # Import this to access parsed args
 
-port = PromptServer.instance.port if hasattr(PromptServer.instance, "port") else "default"
+port = args.port if args.port else "default"  # Use args.port, which is reliably available
 DB_PATH = Path(__file__).resolve().parents[2] / "data" / f"qm-queue_{port}.db"
 _local = threading.local()
 
